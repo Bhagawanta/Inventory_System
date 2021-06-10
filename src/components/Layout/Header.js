@@ -89,7 +89,7 @@ class Header extends React.Component {
           <SearchInput />
         </Nav>
 
-        <Nav navbar className={bem.e('nav-right')}>
+        {/* <Nav navbar className={bem.e('nav-right')}>
           <NavItem className="d-inline-flex">
             <NavLink id="Popover1" className="position-relative">
               {isNotificationConfirmed ? (
@@ -164,7 +164,7 @@ class Header extends React.Component {
               </PopoverBody>
             </Popover>
           </NavItem>
-        </Nav>
+        </Nav> */}
       </Navbar>
     );
   }

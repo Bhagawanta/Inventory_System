@@ -1,6 +1,5 @@
 import Page from 'components/Page';
-import Typography from 'components/Typography';
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Button,
     Card,
@@ -8,14 +7,57 @@ import {
     CardHeader,
     Col,
     Form,
-    FormFeedback,
     FormGroup,
-    FormText,
     Input,
     Label,
     Row,
 } from 'reactstrap';
  const Item = () => {
+
+    const [name, setName] = useState('');
+    const [make, setMake] = useState('');
+    const [value, setValue] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //alert("Hello"+name);
+        if(name === ""|| name === null){
+          alert("Please enter item name");
+        }
+        else if(make === ""|| make === null){
+          alert("Please enter item make");
+        }
+        else if(value === ""|| value === null){
+          alert("Please enter item value");
+        }
+        else {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("itemname", name);
+        urlencoded.append("itemmake", make);
+        urlencoded.append("itemprice", value);
+
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: 'follow'
+        };
+
+        fetch("http://localhost:3001/item", requestOptions)
+          .then(response => response.json())
+          .then(result => {
+            alert("Successfully Added....");
+            setName('');
+            setMake('');
+            setValue('');
+            console.log(result)
+          })
+          .catch(error => console.log('error', error));
+            }
+          }
     return (
     <Page title="Items" breadcrumbs={[{ name: 'items', active: true }]}>
       <Row>
@@ -23,33 +65,37 @@ import {
           <Card>
             <CardHeader>Items Input</CardHeader>
             <CardBody>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                  <Label for="itemname">Item Name</Label>
+                  <Label>Item Name</Label>
                   <Input
                     type="text"
                     name="item_name"
                     placeholder="item name"
+                    value={name}
+                    onChange={(e)=>setName(e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label for="exampleEmail">Item Make</Label>
+                  <Label>Item Make</Label>
                   <Input
                     type="text"
                     name="item_make"
                     placeholder="item make"
+                    value={make}
+                    onChange={(e)=>setMake(e.target.value)}
                   />
                 </FormGroup>
-                {/* <FormGroup>
-                  <Label for="exampleSelect">Select</Label>
-                  <Input type="select" name="select">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </Input>
-                </FormGroup> */}
+                <FormGroup>
+                  <Label>Item Value</Label>
+                  <Input
+                    type="text"
+                    name="item_value"
+                    placeholder="item value"
+                    value={value}
+                    onChange={(e)=>setValue(e.target.value)}
+                  />
+                </FormGroup>
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
                     <Button>Submit</Button>

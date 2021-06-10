@@ -10,6 +10,11 @@ import './styles/reduction.scss';
 
 const ItemPage = React.lazy(()=> import('pages/inventory/Item'));
 const VendorPage = React.lazy(()=> import('pages/inventory/Vendors'));
+const OrderPage = React.lazy(()=> import('pages/inventory/Orders'));
+const ViewItem = React.lazy(()=> import('pages/view/Item'));
+const ViewVendor = React.lazy(()=> import('pages/view/Vendor'));
+const ViewOrder = React.lazy(()=> import('pages/view/Order'));
+
 const AlertPage = React.lazy(() => import('pages/AlertPage'));
 const AuthModalPage = React.lazy(() => import('pages/AuthModalPage'));
 const BadgePage = React.lazy(() => import('pages/BadgePage'));
@@ -59,6 +64,11 @@ class App extends React.Component {
                 <Route exact path="/" component={DashboardPage} />
                 <Route exact path="/items" component={ItemPage} />
                 <Route exact path="/vendor" component={VendorPage}/>
+                <Route exact path="/orders" component={OrderPage}/>
+                <Route exact path="/view_item" component={ViewItem}/>
+                <Route exact path="/view_vendor" component={ViewVendor}/>
+                <Route exact path="/view_order" component={ViewOrder}/>
+                
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route exact path="/buttons" component={ButtonPage} />
                 <Route exact path="/cards" component={CardPage} />

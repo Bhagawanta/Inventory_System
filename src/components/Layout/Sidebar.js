@@ -1,10 +1,12 @@
 import logo200Image from 'assets/img/logo/logo_200.png';
 import sidebarBgImage from 'assets/img/sidebar/sidebar-4.jpg';
 import SourceLink from 'components/SourceLink';
+import { exact } from 'prop-types';
 import React from 'react';
 import { FaGithub } from 'react-icons/fa';
 import {
   MdAccountCircle,
+  MdAddToPhotos,
   MdArrowDropDownCircle,
   MdBorderAll,
   MdBrush,
@@ -46,33 +48,35 @@ const sidebarBackground = {
 const navInventory = [
   { to: '/items', name: 'items', exact: false, Icon: MdRadioButtonChecked },
   { to: '/vendor', name: 'vendors', exact: false, Icon: MdRadioButtonChecked},
+  { to: '/orders', name: 'orders' , exact: false, Icon:MdRadioButtonChecked},
 ] 
 
-const navComponents = [
-  { to: '/buttons', name: 'buttons', exact: false, Icon: MdRadioButtonChecked },
-  {
-    to: '/button-groups',
-    name: 'button groups',
-    exact: false,
-    Icon: MdGroupWork,
-  },
-  { to: '/forms', name: 'forms', exact: false, Icon: MdChromeReaderMode },
-  { to: '/input-groups', name: 'input groups', exact: false, Icon: MdViewList },
-  {
-    to: '/dropdowns',
-    name: 'dropdowns',
-    exact: false,
-    Icon: MdArrowDropDownCircle,
-  },
-  { to: '/badges', name: 'badges', exact: false, Icon: MdStar },
-  { to: '/alerts', name: 'alerts', exact: false, Icon: MdNotificationsActive },
-  { to: '/progress', name: 'progress', exact: false, Icon: MdBrush },
-  { to: '/modals', name: 'modals', exact: false, Icon: MdViewDay },
-];
+// const navComponents = [
+//   { to: '/buttons', name: 'buttons', exact: false, Icon: MdRadioButtonChecked },
+//   {
+//     to: '/button-groups',
+//     name: 'button groups',
+//     exact: false,
+//     Icon: MdGroupWork,
+//   },
+//   { to: '/forms', name: 'forms', exact: false, Icon: MdChromeReaderMode },
+//   { to: '/input-groups', name: 'input groups', exact: false, Icon: MdViewList },
+//   {
+//     to: '/dropdowns',
+//     name: 'dropdowns',
+//     exact: false,
+//     Icon: MdArrowDropDownCircle,
+//   },
+//   { to: '/badges', name: 'badges', exact: false, Icon: MdStar },
+//   { to: '/alerts', name: 'alerts', exact: false, Icon: MdNotificationsActive },
+//   { to: '/progress', name: 'progress', exact: false, Icon: MdBrush },
+//   { to: '/modals', name: 'modals', exact: false, Icon: MdViewDay },
+// ];
 
 const navContents = [
-  { to: '/typography', name: 'typography', exact: false, Icon: MdTextFields },
-  { to: '/tables', name: 'tables', exact: false, Icon: MdBorderAll },
+  { to: '/view_item', name: 'Item', exact: false, Icon: MdTextFields },
+  { to: '/view_vendor', name: 'Vendor', exact: false, Icon: MdBorderAll },
+  { to: '/view_order', name: 'Order', exact: false, Icon:MdAddToPhotos}
 ];
 
 const pageContents = [
@@ -120,18 +124,18 @@ class Sidebar extends React.Component {
             <SourceLink className="navbar-brand d-flex">
               <img
                 src={logo200Image}
-                width="40"
+                width="30"
                 height="30"
                 className="pr-2"
                 alt=""
               />
               <span className="text-white">
-                Reduction <FaGithub />
+                NIC Inventory
               </span>
             </SourceLink>
           </Navbar>
           <Nav vertical>
-            {navItems.map(({ to, name, exact, Icon }, index) => (
+            {/* {navItems.map(({ to, name, exact, Icon }, index) => (
               <NavItem key={index} className={bem.e('nav-item')}>
                 <BSNavLink
                   id={`navItem-${name}-${index}`}
@@ -145,7 +149,7 @@ class Sidebar extends React.Component {
                   <span className="">{name}</span>
                 </BSNavLink>
               </NavItem>
-            ))}
+            ))} */}
 
             <NavItem
               className={bem.e('nav-item')}
@@ -188,7 +192,7 @@ class Sidebar extends React.Component {
             </Collapse>
 
 
-            <NavItem
+            {/* <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}
             >
@@ -226,7 +230,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>
+            </Collapse>*/}
 
             <NavItem
               className={bem.e('nav-item')}
@@ -235,7 +239,7 @@ class Sidebar extends React.Component {
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
                   <MdSend className={bem.e('nav-item-icon')} />
-                  <span className="">Contents</span>
+                  <span className="">View</span>
                 </div>
                 <MdKeyboardArrowDown
                   className={bem.e('nav-item-icon')}
@@ -268,7 +272,7 @@ class Sidebar extends React.Component {
               ))}
             </Collapse>
 
-            <NavItem
+{/*}            <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Pages')}
             >
@@ -306,7 +310,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>
+            </Collapse> */}
           </Nav>
         </div>
       </aside>
