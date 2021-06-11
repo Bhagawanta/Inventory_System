@@ -112,7 +112,7 @@ let connection = mysql.createConnection({
 // order table api 
 
 app.get('/orders', (req,res)=>{
-    connection.query('SELECT * FROM order',  (error, results, fields)=> {
+    connection.query('SELECT * FROM ordertable',  (error, results, fields)=> {
       if (!error)
           res.send(results)
           else
@@ -120,7 +120,7 @@ app.get('/orders', (req,res)=>{
       });
   })
    app.get('/order/:id', (req ,res) =>{
-     connection.query('select * from order where vendor_id = ?',[req.params.id],(err,rows)=>{
+     connection.query('select * from ordertable where vendor_id = ?',[req.params.id],(err,rows)=>{
        if(!err)
        res.send(rows)
        else
@@ -128,8 +128,8 @@ app.get('/orders', (req,res)=>{
      })
    });  
    app.post('/order',(req,res)=>{
-    let { poid,podate,iqty,ivalue,dod,doi,wyears,wupto,vendorid,itemid } = req.body;
-    connection.query("INSERT INTO ordertable(po_id, po_date, item_qty, item_value, dod, doi, wyears, wupto, vendorid, itemid) VALUES (?,?,?,?,?,?,?,?,?,?)",[poid,podate,iqty,ivalue,dod,doi,wyears,wupto,vendorid,itemid],(error,results,fields)=>{
+    let { poid,podate,iqty,ivalue,dod,doi,wyears,wupto,vendorid,itemid,vname,iname} = req.body;
+    connection.query("INSERT INTO ordertable(po_id, po_date, item_qty, item_value, dod, doi, wyears, wupto, vendorid, itemid,vendor_name,item_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",[poid,podate,iqty,ivalue,dod,doi,wyears,wupto,vendorid,itemid,vname,iname],(error,results,fields)=>{
         if(!error)
         res.send(results)
         else

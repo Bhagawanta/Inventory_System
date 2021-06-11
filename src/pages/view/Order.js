@@ -24,7 +24,7 @@ const Order = () => {
             redirect: 'follow'
           };
           
-          fetch("http://localhost:3001/vendors", requestOptions)
+          fetch("http://localhost:3001/orders", requestOptions)
             .then(response => response.json())
             .then(result => {
                 setData(result)
@@ -35,19 +35,25 @@ const Order = () => {
 
     return (
         <React.Fragment>
-            <Page title="Items List" breadcrumbs={[{ name: 'items', active: true }]}>
+            <Page title="Order List" breadcrumbs={[{ name: 'items', active: true }]}>
       <Row>
       <Col  lg={12} md={12}>
           <Card>
-            <CardHeader>Items List</CardHeader>
+            <CardHeader>Order List</CardHeader>
             <CardBody>
             <Table responsive>
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>PO</th>
+                    <th>PO Date</th>
                     <th>Vendor Name</th>
-                    <th>Vendor Mobile</th>
-                    <th>Vendor Address</th>
+                    <th>Item Name </th>
+                    <th>Quantity</th>
+                    <th>Value</th>
+                    <th>Date Of Delivery</th>
+                    <th>Date Of Installation</th>
+                    <th>Warranty Years</th>
+                    <th>Warranty Upto</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -55,10 +61,16 @@ const Order = () => {
                     data.map((item,index)=>{
                         return(
                                 <tr key={index}>
-                                    <th scope="row">{item.vendor_id}</th>
+                                    <th scope="row">{item.po_id}</th>
+                                    <td>{item.po_date}</td>
                                     <td>{item.vendor_name}</td>
-                                    <td>{item.vendor_mobile}</td>
-                                    <td>{item.vendor_address}</td>
+                                    <td>{item.item_name}</td>
+                                    <td>{item.item_qty}</td>
+                                    <td>{item.item_value}</td>
+                                    <td>{item.dod}</td>
+                                    <td>{item.doi}</td>
+                                    <td>{item.wyears}</td>
+                                    <td>{item.wupto}</td>
                                 </tr>
                         )
                     })}

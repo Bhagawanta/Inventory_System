@@ -27,6 +27,8 @@ const Orders = () => {
     const [wupto, setWupto] = useState('');
     const [vendorid, setVendorid] = useState('');
     const [itemid, setItemid] = useState('');
+    const [vendorname, setVendorname] = useState('');
+    const [itemname, setItemname] = useState('');
 
 
 
@@ -57,8 +59,10 @@ const Orders = () => {
 
     const checkValue = (e) => {
 
-        e.preventDefault();
+        // e.preventDefault();
         const qty = e.target.value;
+        // const re = /^[0-9\b]+$/;
+
 
         var requestOptions = {
           method: 'GET',
@@ -78,6 +82,56 @@ const Orders = () => {
           .catch(error => console.log('error', error));
 
           setQty(e.target.value)
+        
+    }
+
+    const checkVendor = (e) => {
+      
+      setVendorid(e.target.value);
+      const v = e.target.value;
+      // console.log(v);
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      
+      fetch("http://localhost:3001/vendor/"+e.target.value, requestOptions)
+        .then(response => response.json())
+        .then(result =>{
+          const  nm1 = result[0]["vendor_name"];
+          setVendorname(nm1);
+          console.log(nm1)
+          })
+        .catch(error => console.log('error', error));
+          // setVendorname(nm1);
+          console.log(vendorname+""+vendorid);
+       
+
+    }
+
+    const checkItem = (e) => {
+      
+      setItemid(e.target.value);
+      const v = e.target.value;
+      // console.log(v);
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      
+      fetch("http://localhost:3001/item/"+e.target.value, requestOptions)
+        .then(response => response.json())
+        .then(result =>{
+          const  nm1 = result[0]["item_name"];
+          setItemname(nm1);
+          console.log(nm1)
+          })
+        .catch(error => console.log('error', error));
+          // setVendorname(nm1);
+          console.log(itemname+""+itemid);
+          setQty('');
+          setValue('');
+       
 
     }
 
@@ -108,6 +162,19 @@ const Orders = () => {
             alert("Please provide field !");
           }
           else {
+
+              
+                
+                fetch("http://localhost:3001/item/"+itemid, requestOptions)
+                  .then(response => response.json())
+                  .then(result =>{ 
+                    const nm = result[0]["item_name"];
+                    setItemname(nm);
+                    console.log(result)
+                  })
+                  .catch(error => console.log('error', error));
+      
+
               var myHeaders = new Headers();
               myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -122,6 +189,8 @@ const Orders = () => {
               urlencoded.append("wupto", wupto);
               urlencoded.append("vendorid", vendorid);
               urlencoded.append("itemid", itemid);
+              urlencoded.append("vname", vendorname);
+              urlencoded.append("iname", itemname);
 
               var requestOptions = {
                 method: 'POST',
@@ -134,7 +203,8 @@ const Orders = () => {
                 .then(response => response.json())
                 .then(result => {
                   alert("Successfully Added....");
-                  console.log(result)})
+                  console.log(result)
+                  })
                 .catch(error => console.log('error', error));
           }
     }
@@ -169,7 +239,8 @@ const Orders = () => {
                   </FormGroup>
                   <FormGroup>
                   <Label for="exampleSelect">Vendor Name</Label>
-                  <Input type="select" name="vendor_name" onChange={(e)=>setVendorid(e.target.value)}>
+                  <Input type="select" name="vendor_name" onChange={checkVendor}>
+                    <option>select</option>
                     { vname && (
                      vname.map((item,index)=>{
                        return(
@@ -181,7 +252,8 @@ const Orders = () => {
                 </FormGroup>
                 <FormGroup>
                   <Label for="exampleSelect">Item Name</Label>
-                  <Input type="select" name="item_name" onChange={(e)=>setItemid(e.target.value)}>
+                  <Input type="select" name="item_name" onChange={checkItem}>
+                  <option>select</option>
                   { iname && (
                      iname.map((item,index)=>{
                        return(
