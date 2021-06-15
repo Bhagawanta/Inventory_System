@@ -73,7 +73,12 @@ import {
                     name="item_name"
                     placeholder="item name"
                     value={name}
-                    onChange={(e)=>setName(e.target.value)}
+                    onChange={(e)=>{
+                      const re = /^[a-zA-Z0-9\b\s\x28-\x29\x2D]+$/; //rules
+                      if (e.target.value === "" || re.test(e.target.value)) {
+                      setName(e.target.value)}
+                      
+                      }}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -83,7 +88,11 @@ import {
                     name="item_make"
                     placeholder="item make"
                     value={make}
-                    onChange={(e)=>setMake(e.target.value)}
+                    onChange={(e)=>{
+                      const re = /^[a-zA-Z\b\s]+$/; //rules
+                      if (e.target.value === "" || re.test(e.target.value)) {
+                      setMake(e.target.value)}
+                      }}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -93,7 +102,11 @@ import {
                     name="item_value"
                     placeholder="item value"
                     value={value}
-                    onChange={(e)=>setValue(e.target.value)}
+                    onChange={(e)=>{
+                      const re = /^[0-9\b]+$/; //rules
+                      if (e.target.value === "" || re.test(e.target.value)) {
+                      setValue(e.target.value)}
+                      }}
                   />
                 </FormGroup>
                 <FormGroup check row>

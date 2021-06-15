@@ -62,8 +62,8 @@ const Vendors = () => {
     }
 
     const check = () => {
-            const date1 = new Date('07/03/1998'); //m/d/y
-            const date2 = new Date('06/10/2021');
+            const date1 = new Date('12/14/1997'); //m/d/y
+            const date2 = new Date('06/15/2021');
             const diffTime = Math.abs(date2 - date1);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             alert(diffTime + " milliseconds");
@@ -87,17 +87,26 @@ const Vendors = () => {
                     name="vendor_name"
                     placeholder="vendor name"
                     value={name}
-                    onChange={(e)=>setName(e.target.value)}
+                    onChange={(e)=>{
+                      const re = /^[a-zA-Z\b\s]+$/; //rules
+                      if (e.target.value === "" || re.test(e.target.value)) {
+                      setName(e.target.value)}                      
+                      }}
                   />
                 </FormGroup>
                 <FormGroup>
                   <Label>Vendor Mobile</Label>
                   <Input
-                    type="number"
+                    type="text"
                     name="vendor_mobile"
                     placeholder="vendor mobile"
                     value={mobile}
-                    onChange={(e)=>setMobile(e.target.value)}
+                    onChange={(e)=>{
+                       const re = /^[0-9\b]+$/; //rules
+                        if (e.target.value === "" || re.test(e.target.value)) {
+                         // setPhoneNumber(e.target.value);
+                      setMobile(e.target.value)}
+                    }}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -107,7 +116,11 @@ const Vendors = () => {
                     name="vendor_"
                     placeholder="vendor address"
                     value={address}
-                    onChange={(e)=>setAddress(e.target.value)}
+                    onChange={(e)=>{
+                      const re = /^[a-zA-Z\b\s]+$/; //rules
+                      if (e.target.value === "" || re.test(e.target.value)) {
+                      setAddress(e.target.value)}
+                    }}
                   />
                 </FormGroup>
                 <FormGroup check row>

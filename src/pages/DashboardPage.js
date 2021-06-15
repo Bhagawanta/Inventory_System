@@ -67,7 +67,7 @@ class DashboardPage extends React.Component {
         title="Dashboard"
         breadcrumbs={[{ name: 'Dashboard', active: true }]}
       >
-        <Row>
+        {/* <Row>
           <Col lg={3} md={6} sm={6} xs={12}>
             <NumberWidget
               title="Total Profit"
@@ -401,7 +401,7 @@ class DashboardPage extends React.Component {
           <Col lg="4" md="12" sm="12" xs="12">
             <TodosCard todos={todosData} />
           </Col>
-        </Row>
+        </Row> */}
       </Page>
     );
   }

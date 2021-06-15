@@ -35,7 +35,7 @@ const Vendor = () => {
 
     return (
         <React.Fragment>
-            <Page title="Items List" breadcrumbs={[{ name: 'items', active: true }]}>
+            <Page title="Items List" breadcrumbs={[{ name: 'vendors', active: true }]}>
       <Row>
       <Col  lg={12} md={12}>
           <Card>

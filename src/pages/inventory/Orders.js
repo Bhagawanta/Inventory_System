@@ -58,12 +58,11 @@ const Orders = () => {
 
 
     const checkValue = (e) => {
-
+      const re = /^[0-9\b]+$/; //rules
+      if (e.target.value === "" || re.test(e.target.value)){
         // e.preventDefault();
         const qty = e.target.value;
         // const re = /^[0-9\b]+$/;
-
-
         var requestOptions = {
           method: 'GET',
           redirect: 'follow'
@@ -82,13 +81,13 @@ const Orders = () => {
           .catch(error => console.log('error', error));
 
           setQty(e.target.value)
-        
+      }        
     }
 
     const checkVendor = (e) => {
       
       setVendorid(e.target.value);
-      const v = e.target.value;
+      // const v = e.target.value;
       // console.log(v);
       var requestOptions = {
         method: 'GET',
@@ -112,7 +111,7 @@ const Orders = () => {
     const checkItem = (e) => {
       
       setItemid(e.target.value);
-      const v = e.target.value;
+      // const v = e.target.value;
       // console.log(v);
       var requestOptions = {
         method: 'GET',
@@ -165,7 +164,7 @@ const Orders = () => {
 
               
                 
-                fetch("http://localhost:3001/item/"+itemid, requestOptions)
+                fetch("http://localhost:3001/item/"+itemid)
                   .then(response => response.json())
                   .then(result =>{ 
                     const nm = result[0]["item_name"];
@@ -224,7 +223,12 @@ const Orders = () => {
                       name="po_id"
                       placeholder="po id"
                       value={po}
-                      onChange={(e)=>setPo(e.target.value)}
+                      onChange={(e)=>{
+                        const re = /^[0-9\b]+$/; //rules
+                      if (e.target.value === "" || re.test(e.target.value)) {
+                      // setValue(e.target.value)}
+                        setPo(e.target.value)}
+                        }}
                     />
                   </FormGroup>
                   <FormGroup>
@@ -266,7 +270,7 @@ const Orders = () => {
                   <FormGroup>
                     <Label>Quantity</Label>
                     <Input
-                      type="number"
+                      type="text"
                       name="quantity"
                       placeholder="quantity"
                       value={qty}
@@ -306,11 +310,15 @@ const Orders = () => {
                   <FormGroup>
                     <Label>Warranty in Years</Label>
                     <Input
-                      type="number"
+                      type="text"
                       name="wyear"
                       placeholder="warranty in years"
                       value={wyears}
-                      onChange={(e)=>setWyears(e.target.value)}
+                      onChange={(e)=>{
+                        const re = /^[0-9\b]+$/; //rules
+                      if (e.target.value === "" || re.test(e.target.value)) {
+                        setWyears(e.target.value)}
+                        }}
                     />
                   </FormGroup>
                   <FormGroup>

@@ -28,6 +28,10 @@ let connection = mysql.createConnection({
     console.log("Connected Failed!"+JSON.stringify(err,undefined,2));
   })
 
+  app.get('/',(req,res) => {
+    res.send("Welcome to node JS");
+  })
+
 //   Item Table API 
   app.get('/items', (req,res)=>{
     connection.query('SELECT * FROM item',  (error, results, fields)=> {
@@ -126,7 +130,7 @@ app.get('/orders', (req,res)=>{
        else
        console.log(err);
      })
-   });  
+   });
    app.post('/order',(req,res)=>{
     let { poid,podate,iqty,ivalue,dod,doi,wyears,wupto,vendorid,itemid,vname,iname} = req.body;
     connection.query("INSERT INTO ordertable(po_id, po_date, item_qty, item_value, dod, doi, wyears, wupto, vendorid, itemid,vendor_name,item_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",[poid,podate,iqty,ivalue,dod,doi,wyears,wupto,vendorid,itemid,vname,iname],(error,results,fields)=>{

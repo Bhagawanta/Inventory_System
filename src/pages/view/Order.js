@@ -35,7 +35,7 @@ const Order = () => {
 
     return (
         <React.Fragment>
-            <Page title="Order List" breadcrumbs={[{ name: 'items', active: true }]}>
+            <Page title="Order List" breadcrumbs={[{ name: 'orders', active: true }]}>
       <Row>
       <Col  lg={12} md={12}>
           <Card>
