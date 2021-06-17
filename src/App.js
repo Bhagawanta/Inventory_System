@@ -2,6 +2,7 @@ import { STATE_LOGIN, STATE_SIGNUP } from 'components/AuthForm';
 import GAListener from 'components/GAListener';
 import { EmptyLayout, LayoutRoute, MainLayout } from 'components/Layout';
 import PageSpinner from 'components/PageSpinner';
+import moment from 'moment';
 import AuthPage from 'pages/AuthPage';
 import React from 'react';
 import componentQueries from 'react-component-queries';
@@ -37,6 +38,36 @@ const getBasename = () => {
 };
 
 class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state={
+      data:[],
+    }
+  }
+
+
+  componentDidMount = () => {
+    console.log("Hello"+moment().format("YYYY-MM-DD"));
+
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    
+    fetch("http://localhost:3001/orderexpdate", requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({data:result})
+        console.log(this.state.data)
+      })
+      .catch(error => console.log('error', error));
+      this.state.data && this.state.data.map((item)=>{
+        console.log("Data"+item.wupto);
+      });
+
+  }
+
   render() {
     return (
       <BrowserRouter basename={getBasename()}>

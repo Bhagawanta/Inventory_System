@@ -142,6 +142,15 @@ app.get('/orders', (req,res)=>{
     // console.log(poid+podate+iqty+ivalue+dod+doi+wyears+wupto+vendorid+itemid);
   });
 
+  app.get('/orderexpdate',(req,res)=>{
+    connection.query('SELECT wupto FROM ordertable',  (error, results, fields)=> {
+      if (!error)
+          res.send(results)
+          else
+          console.log(error);
+      });
+  });
+
 
 // order table api end 
 

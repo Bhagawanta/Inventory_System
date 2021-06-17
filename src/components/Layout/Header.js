@@ -4,6 +4,7 @@ import Notifications from 'components/Notifications';
 import SearchInput from 'components/SearchInput';
 import { notificationsData } from 'demos/header';
 import withBadge from 'hocs/withBadge';
+import moment from 'moment';
 import React from 'react';
 import {
   MdClearAll,
@@ -87,6 +88,9 @@ class Header extends React.Component {
         </Nav>
         <Nav navbar>
           <SearchInput />
+        </Nav>
+        <Nav navbar style={{marginLeft:30}}>
+        {moment().format("YYYY-MM-DD")}
         </Nav>
 
         {/* <Nav navbar className={bem.e('nav-right')}>
