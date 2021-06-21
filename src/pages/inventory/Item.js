@@ -47,7 +47,15 @@ import {
         };
 
         fetch("http://localhost:3001/item", requestOptions)
-          .then(response => response.json())
+          .then(response =>{
+            if(response.status === 200){
+                console.log("SUCCESSS")
+                return response.json();     
+            }else if(response.status === 400){
+                alert("Something Went Wrong")
+                console.log("SOMETHING WENT WRONG")
+                this.setState({ requestFailed: true })
+            }})
           .then(result => {
             alert("Successfully Added....");
             setName('');
@@ -61,7 +69,7 @@ import {
     return (
     <Page title="Items" breadcrumbs={[{ name: 'items', active: true }]}>
       <Row>
-      <Col  lg={12} md={12}>
+      <Col md={6}>
           <Card>
             <CardHeader>Items Input</CardHeader>
             <CardBody>
@@ -103,7 +111,7 @@ import {
                     placeholder="item value"
                     value={value}
                     onChange={(e)=>{
-                      const re = /^[0-9\b]+$/; //rules
+                      const re = /^[0-9a-z\b]+$/; //rules
                       if (e.target.value === "" || re.test(e.target.value)) {
                       setValue(e.target.value)}
                       }}

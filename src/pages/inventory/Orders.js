@@ -211,7 +211,7 @@ const Orders = () => {
     return (
         <Page title="Orders" breadcrumbs={[{ name: 'orders', active: true }]}>
         <Row>
-        <Col  lg={12} md={12}>
+        <Col  md={6}>
             <Card>
               <CardHeader>Order Input</CardHeader>
               <CardBody>

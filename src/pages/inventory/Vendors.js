@@ -75,7 +75,7 @@ const Vendors = () => {
     return (
     <Page title="Vendors" breadcrumbs={[{ name: 'vendors', active: true }]}>
       <Row>
-      <Col  lg={12} md={12}>
+      <Col  md={6}>
           <Card>
             <CardHeader>Vendors Input</CardHeader>
             <CardBody>
@@ -101,6 +101,7 @@ const Vendors = () => {
                     name="vendor_mobile"
                     placeholder="vendor mobile"
                     value={mobile}
+                    maxlength={10}
                     onChange={(e)=>{
                        const re = /^[0-9\b]+$/; //rules
                         if (e.target.value === "" || re.test(e.target.value)) {

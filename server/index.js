@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { urlencoded, json } = require('body-parser');
-
+const { body, validationResult } = require('express-validator');
 const app = express();
 
 app.use(cors());
@@ -64,7 +64,17 @@ let connection = mysql.createConnection({
       else
       console.log(err);
     })
-  });     app.post('/item',(req,res)=>{
+  });     
+  
+  app.post('/item',
+  body('itemname').isEmail(),
+  body('itemmake').isLength({min:5}),
+  body('itemprice').isNumeric(),
+  (req,res)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     let { itemname, itemmake, itemprice} = req.body;
     connection.query('INSERT INTO item(item_name, item_make, item_price) VALUES(?,?,?)',[itemname,itemmake,itemprice],(error,results,fields)=>{
         if(!error)
