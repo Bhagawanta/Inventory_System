@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { urlencoded, json } = require('body-parser');
-const { body, validationResult } = require('express-validator');
+const { body, validationResult, check } = require('express-validator');
 const app = express();
 
 app.use(cors());
@@ -67,9 +67,9 @@ let connection = mysql.createConnection({
   });     
   
   app.post('/item',
-  body('itemname').isEmail(),
-  body('itemmake').isLength({min:5}),
-  body('itemprice').isNumeric(),
+  check('itemname').matches(/^[a-zA-Z0-9\b\s\x28-\x29\x2D]+$/).withMessage("Item name must be character"),
+  check('itemmake').matches(/^[a-zA-Z\b\s]+$/).withMessage("Item make must be character"),
+  check('itemprice').matches(/^[0-9]+$/).withMessage("Item Price must be digit"),
   (req,res)=>{
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

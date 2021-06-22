@@ -52,7 +52,7 @@ import {
                 console.log("SUCCESSS")
                 return response.json();     
             }else if(response.status === 400){
-                alert("Something Went Wrong")
+                alert("Something Went Wrong"+response)
                 console.log("SOMETHING WENT WRONG")
                 this.setState({ requestFailed: true })
             }})
