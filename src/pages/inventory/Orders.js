@@ -199,7 +199,17 @@ const Orders = () => {
               };
 
               fetch("http://localhost:3001/order", requestOptions)
-                .then(response => response.json())
+                .then(response => {
+                  if(response.status === 200){
+                    console.log("SUCCESSS")
+                    return response.json();     
+                }else if(response.status === 400){
+                    const err = JSON.stringify(response.json());
+                    alert("Please provide proper fields");
+                    console.log("SOMETHING WENT WRONG")
+                    this.setState({ requestFailed: true })
+                }
+                  })
                 .then(result => {
                   alert("Successfully Added....");
                   console.log(result)

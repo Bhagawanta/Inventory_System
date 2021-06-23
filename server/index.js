@@ -75,13 +75,15 @@ let connection = mysql.createConnection({
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    let { itemname, itemmake, itemprice} = req.body;
-    connection.query('INSERT INTO item(item_name, item_make, item_price) VALUES(?,?,?)',[itemname,itemmake,itemprice],(error,results,fields)=>{
-        if(!error)
-        res.send(results)
-        else
-        console.log(error);
-    })
+    else{
+          let { itemname, itemmake, itemprice} = req.body;
+          connection.query('INSERT INTO item(item_name, item_make, item_price) VALUES(?,?,?)',[itemname,itemmake,itemprice],(error,results,fields)=>{
+              if(!error)
+              res.send(results)
+              else
+              console.log(error);
+          })
+       }
   });
 
 //   Item Table API End 
@@ -111,14 +113,24 @@ let connection = mysql.createConnection({
        console.log(err);
      })
    })
-   app.post('/vendor',(req,res)=>{
-    let { vname, vmobile, vaddress} = req.body;
-    connection.query('INSERT INTO vendor(vendor_name, vendor_mobile, vendor_address) VALUES(?,?,?)',[vname, vmobile, vaddress],(error,results,fields)=>{
-        if(!error)
-        res.send(results)
-        else
-        console.log(error);
-    })
+   app.post('/vendor',
+   check('vname').matches(/^[a-zA-Z\b\s]+$/).withMessage('Vendor name must be character'),
+   check('vmobile').matches(/^[0-9\b]+$/).withMessage('Vendor mobile must be numeric'),
+   check('vaddress').matches(/^[a-zA-Z\b\s]+$/).withMessage('Vendor address must be character'),
+   (req,res)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    else{
+          let { vname, vmobile, vaddress} = req.body;
+          connection.query('INSERT INTO vendor(vendor_name, vendor_mobile, vendor_address) VALUES(?,?,?)',[vname, vmobile, vaddress],(error,results,fields)=>{
+              if(!error)
+              res.send(results)
+              else
+              console.log(error);
+          })
+        }
   });
 
 //   vendor table api end 
@@ -141,19 +153,34 @@ app.get('/orders', (req,res)=>{
        console.log(err);
      })
    });
-   app.post('/order',(req,res)=>{
-    let { poid,podate,iqty,ivalue,dod,doi,wyears,wupto,vendorid,itemid,vname,iname} = req.body;
-    connection.query("INSERT INTO ordertable(po_id, po_date, item_qty, item_value, dod, doi, wyears, wupto, vendorid, itemid,vendor_name,item_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",[poid,podate,iqty,ivalue,dod,doi,wyears,wupto,vendorid,itemid,vname,iname],(error,results,fields)=>{
-        if(!error)
-        res.send(results)
-        else
-        console.log(error);
-    })
+   app.post('/order',
+   check('poid').matches(/^[0-9\b]+$/).withMessage('POID must be digit'),
+  //  check('podate').matches().withMessage('PODATE must be in digit'),
+   check('iqty').matches(/^[0-9\b]+$/).withMessage('Item QTY must be digit'),
+  //  check('ivalue').matches().withMessage('Item Value must be digit'),
+  //  check('dod').matches().withMessage('Date Of Delivery contains only digit'),
+  //  check('doi').matches().withMessage('Date of Delivery contains only digit'),
+   check('wyears').matches(/^[0-9\b]+$/).withMessage('Warranty in Years must be digit'),
+  //  check('wupto').matches().withMessage('Warranty upto contains only digit'),
+   (req,res)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    else{
+          let { poid,podate,iqty,ivalue,dod,doi,wyears,wupto,vendorid,itemid,vname,iname} = req.body;
+          connection.query("INSERT INTO ordertable(po_id, po_date, item_qty, item_value, dod, doi, wyears, wupto, vendorid, itemid,vendor_name,item_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",[poid,podate,iqty,ivalue,dod,doi,wyears,wupto,vendorid,itemid,vname,iname],(error,results,fields)=>{
+              if(!error)
+              res.send(results)
+              else
+              console.log(error);
+          })
+        }
     // console.log(poid+podate+iqty+ivalue+dod+doi+wyears+wupto+vendorid+itemid);
   });
 
   app.get('/orderexpdate',(req,res)=>{
-    connection.query('SELECT wupto FROM ordertable',  (error, results, fields)=> {
+    connection.query('SELECT item_name,wupto FROM ordertable',  (error, results, fields)=> {
       if (!error)
           res.send(results)
           else

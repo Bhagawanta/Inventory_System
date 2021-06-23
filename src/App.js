@@ -8,6 +8,7 @@ import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
+import Moment from 'moment';
 
 const ItemPage = React.lazy(()=> import('pages/inventory/Item'));
 const VendorPage = React.lazy(()=> import('pages/inventory/Vendors'));
@@ -60,12 +61,33 @@ class App extends React.Component {
       .then(result => {
         this.setState({data:result})
         console.log(this.state.data)
+        this.state.data && this.state.data.map((item)=>{
+            // const date1 = new Date('12/14/1997'); //m/d/y
+            // const date2 = new Date('06/15/2021');
+            const dd = item.wupto;
+            const a = Moment(dd).format('MM/DD/YYYY')
+            const b = moment().format('MM/DD/YYYY');
+            const date1 = new Date(a);
+            const date2 = new Date(b);
+            console.log(date1+date2);
+            const diffTime = Math.abs(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            const years = diffDays/365;
+            const days1 = diffDays%365;
+           // alert(diffTime + " milliseconds");
+            alert("Remaining Days "+diffDays+" For Item "+item.item_name);
+           // alert(years + "Years" + days1 + "Days");
+           if(diffDays < 70){
+             this.reminder()
+           }
+          console.log(item.wupto);
+        })
       })
       .catch(error => console.log('error', error));
-      this.state.data && this.state.data.map((item)=>{
-        console.log("Data"+item.wupto);
-      });
+  }
 
+   reminder = () => {
+      alert("Email Generated...");
   }
 
   render() {

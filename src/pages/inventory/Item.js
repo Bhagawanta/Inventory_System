@@ -17,7 +17,7 @@ import {
     const [name, setName] = useState('');
     const [make, setMake] = useState('');
     const [value, setValue] = useState('');
-
+    const [alt, setAlt] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
         //alert("Hello"+name);
@@ -52,7 +52,8 @@ import {
                 console.log("SUCCESSS")
                 return response.json();     
             }else if(response.status === 400){
-                alert("Something Went Wrong"+response)
+                const err = JSON.stringify(response.json());
+                alert("Please provide proper fields");
                 console.log("SOMETHING WENT WRONG")
                 this.setState({ requestFailed: true })
             }})
@@ -111,7 +112,7 @@ import {
                     placeholder="item value"
                     value={value}
                     onChange={(e)=>{
-                      const re = /^[0-9a-z\b]+$/; //rules
+                      const re = /^[0-9\b]+$/; //rules
                       if (e.target.value === "" || re.test(e.target.value)) {
                       setValue(e.target.value)}
                       }}
