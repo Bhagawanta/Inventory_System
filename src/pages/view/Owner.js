@@ -14,7 +14,7 @@ import {
     Table
 } from 'reactstrap';
 // const tableTypes = ['', 'bordered', 'striped', 'hover'];
-const Vendor = () => {
+const Owner = () => {
 
     const [data, setData] = useState([]);
     
@@ -24,7 +24,7 @@ const Vendor = () => {
             redirect: 'follow'
           };
           
-          fetch("http://localhost:3001/vendors", requestOptions)
+          fetch("http://localhost:3001/owners", requestOptions)
             .then(response => response.json())
             .then(result => {
                 setData(result)
@@ -35,19 +35,19 @@ const Vendor = () => {
 
     return (
         <React.Fragment>
-            <Page title="Vendor List" breadcrumbs={[{ name: 'vendors', active: true }]}>
+            <Page title="Owner List" breadcrumbs={[{ name: 'owners', active: true }]}>
       <Row>
       <Col  lg={12} md={12}>
           <Card>
-            <CardHeader>Vendor List</CardHeader>
+            <CardHeader>Owner List</CardHeader>
             <CardBody>
             <Table responsive>
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Vendor Name</th>
-                    <th>Vendor Mobile</th>
-                    <th>Vendor Address</th>
+                    <th>Owner Name</th>
+                    <th>Owner Mobile</th>
+                    <th>Owner Email</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -55,10 +55,10 @@ const Vendor = () => {
                     data.map((item,index)=>{
                         return(
                                 <tr key={index}>
-                                    <th scope="row">{item.vendor_id}</th>
-                                    <td>{item.vendor_name}</td>
-                                    <td>{item.vendor_mobile}</td>
-                                    <td>{item.vendor_address}</td>
+                                    <th scope="row">{item.owner_id}</th>
+                                    <td>{item.owner_name}</td>
+                                    <td>{item.owner_mobile}</td>
+                                    <td>{item.owner_email}</td>
                                 </tr>
                         )
                     })}
@@ -73,4 +73,4 @@ const Vendor = () => {
     )
 }
 
-export default Vendor;
+export default Owner;

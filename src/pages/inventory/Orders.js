@@ -1,4 +1,5 @@
 import Page from 'components/Page';
+import moment from 'moment';
 import React, { useState, useEffect } from 'react';
 import {
     Button,
@@ -19,6 +20,7 @@ const Orders = () => {
     const [podate, setPodate] = useState('');
     const [vname, setVname] = useState([]);
     const [iname, setIname] = useState([]);
+    const [oname, setOname] = useState([]);
     const [qty, setQty] = useState('');
     const [value, setValue] = useState('');
     const [dod, setDod] = useState('');
@@ -27,9 +29,10 @@ const Orders = () => {
     const [wupto, setWupto] = useState('');
     const [vendorid, setVendorid] = useState('');
     const [itemid, setItemid] = useState('');
+    const [ownerid, setOwnerid] = useState('');
     const [vendorname, setVendorname] = useState('');
     const [itemname, setItemname] = useState('');
-
+    const [ownername, setOwnername] = useState('');
 
 
     useEffect(()=>{
@@ -53,6 +56,14 @@ const Orders = () => {
           console.log(result)
         })
         .catch(error => console.log('error', error));
+
+        fetch("http://localhost:3001/ownerlist", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            setOname(result)
+          console.log(result)
+        })
+        .catch(error => console.log('error', error));
           
     },[])
 
@@ -70,10 +81,11 @@ const Orders = () => {
         
         fetch("http://localhost:3001/itemvalue/"+itemid, requestOptions)
           .then(response => response.json())
-          .then(result => {
+          .then(results => {
             // const json = JSON.parse(result);
             // const data = json["item_price"];
-            const data = result[0]["item_price"]
+            const data = results[0]["item_value"];
+            console.log("Data : "+data);
             const value = qty*data
             setValue(value)
             console.log(value)
@@ -108,6 +120,30 @@ const Orders = () => {
 
     }
 
+    const checkOwner = (e) => {
+      setOwnerid(e.target.value);
+      const v = e.target.value;
+      console.log(v);
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      
+      fetch("http://localhost:3001/owner/"+e.target.value, requestOptions)
+        .then(response => response.json())
+        .then(result =>{
+          const  nm1 = result[0]["owner_name"];
+          setOwnername(nm1);
+          console.log(nm1)
+          })
+        .catch(error => console.log('error', error));
+          // setVendorname(nm1);
+          // console.log(vendorname+""+vendorid);
+       
+
+    }
+
+
     const checkItem = (e) => {
       
       setItemid(e.target.value);
@@ -133,6 +169,8 @@ const Orders = () => {
        
 
     }
+
+
 
     const handleSubmit = (e) => {
           e.preventDefault();
@@ -188,8 +226,10 @@ const Orders = () => {
               urlencoded.append("wupto", wupto);
               urlencoded.append("vendorid", vendorid);
               urlencoded.append("itemid", itemid);
+              urlencoded.append("ownerid",ownerid);
               urlencoded.append("vname", vendorname);
               urlencoded.append("iname", itemname);
+              urlencoded.append("oname",ownername);
 
               var requestOptions = {
                 method: 'POST',
@@ -205,7 +245,7 @@ const Orders = () => {
                     return response.json();     
                 }else if(response.status === 400){
                     const err = JSON.stringify(response.json());
-                    alert("Please provide proper fields");
+                    alert("Please provide proper fields"+err);
                     console.log("SOMETHING WENT WRONG")
                     this.setState({ requestFailed: true })
                 }
@@ -254,7 +294,7 @@ const Orders = () => {
                   <FormGroup>
                   <Label for="exampleSelect">Vendor Name</Label>
                   <Input type="select" name="vendor_name" onChange={checkVendor}>
-                    <option>select</option>
+                    <option selected={true} disabled={true}>select</option>
                     { vname && (
                      vname.map((item,index)=>{
                        return(
@@ -267,7 +307,7 @@ const Orders = () => {
                 <FormGroup>
                   <Label for="exampleSelect">Item Name</Label>
                   <Input type="select" name="item_name" onChange={checkItem}>
-                  <option>select</option>
+                  <option selected={true} disabled={true}>select</option>
                   { iname && (
                      iname.map((item,index)=>{
                        return(
@@ -298,6 +338,19 @@ const Orders = () => {
                     />
                   </FormGroup>
                   <FormGroup>
+                  <Label for="exampleSelect">Owner Name</Label>
+                  <Input type="select" name="owner_name" onChange={checkOwner}>
+                  <option selected={true} disabled={true}>select</option>
+                  { oname && (
+                     oname.map((item,index)=>{
+                       return(
+                      <option key={index} dropdown={item} value={item.owner_id}>{item.owner_name}</option>
+                       )
+                     })
+                    )}
+                  </Input>
+                </FormGroup>
+                  <FormGroup>
                     <Label>Date of Delivery</Label>
                     <Input
                       type="date"
@@ -327,7 +380,43 @@ const Orders = () => {
                       onChange={(e)=>{
                         const re = /^[0-9\b]+$/; //rules
                       if (e.target.value === "" || re.test(e.target.value)) {
-                        setWyears(e.target.value)}
+                        setWyears(e.target.value)
+                        const d = new Date(""+doi);
+                        console.log(doi);
+                        // const a = e.target.value;
+                        if(e.target.value === "5"){
+                        d.setFullYear(d.getFullYear()+5)
+                        const ab = moment(d).format('YYYY-MM-DD');
+                        setWupto(ab);
+                        }
+                        else if(e.target.value === "4"){
+                          d.setFullYear(d.getFullYear()+4)
+                          const ab = moment(d).format('YYYY-MM-DD');
+                          setWupto(ab);
+                        }
+                        else if(e.target.value === "3"){
+                          d.setFullYear(d.getFullYear()+3)
+                          const ab = moment(d).format('YYYY-MM-DD');
+                          setWupto(ab);
+                        }
+                        else if(e.target.value === "2"){
+                          d.setFullYear(d.getFullYear()+2)
+                          const ab = moment(d).format('YYYY-MM-DD');
+                          setWupto(ab);
+                        }
+                        else if(e.target.value === "1"){
+                          d.setFullYear(d.getFullYear()+1)
+                          const ab = moment(d).format('YYYY-MM-DD');
+                          setWupto(ab);
+                        }
+                        else if(e.target.value>5){
+                          setWupto('');
+                        }
+                        // console.log(d);
+                        // console.log(ab);
+                        // setWupto(ab);
+                        // alert(d);
+                        }
                         }}
                     />
                   </FormGroup>
@@ -338,6 +427,7 @@ const Orders = () => {
                       name="wupto"
                       placeholder="warranty upto"
                       value={wupto}
+                      disabled={true}
                       onChange={(e)=>setWupto(e.target.value)}
                     />
                   </FormGroup>

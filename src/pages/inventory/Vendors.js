@@ -55,7 +55,7 @@ const Vendors = () => {
                 return response.json();     
             }else if(response.status === 400){
                 const err = JSON.stringify(response.json());
-                alert("Please provide proper fields");
+                alert("Please provide proper fields"+err);
                 console.log("SOMETHING WENT WRONG")
                 this.setState({ requestFailed: true })
             }
@@ -71,17 +71,17 @@ const Vendors = () => {
         } 
     }
 
-    const check = () => {
-            const date1 = new Date('12/14/1997'); //m/d/y
-            const date2 = new Date('06/15/2021');
-            const diffTime = Math.abs(date2 - date1);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-            alert(diffTime + " milliseconds");
-            alert(diffDays + " days");
-            const years = diffDays/365;
-            const days1 = diffDays%365;
-            alert(years + "Years" + days1 + "Days");
-    }
+    // const check = () => {
+    //         const date1 = new Date('12/14/1997'); //m/d/y
+    //         const date2 = new Date('06/15/2021');
+    //         const diffTime = Math.abs(date2 - date1);
+    //         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    //         alert(diffTime + " milliseconds");
+    //         alert(diffDays + " days");
+    //         const years = diffDays/365;
+    //         const days1 = diffDays%365;
+    //         alert(years + "Years" + days1 + "Days");
+    // }
     return (
     <Page title="Vendors" breadcrumbs={[{ name: 'vendors', active: true }]}>
       <Row>
@@ -111,7 +111,7 @@ const Vendors = () => {
                     name="vendor_mobile"
                     placeholder="vendor mobile"
                     value={mobile}
-                    maxlength={10}
+                    maxLength={10}
                     onChange={(e)=>{
                        const re = /^[0-9\b]+$/; //rules
                         if (e.target.value === "" || re.test(e.target.value)) {

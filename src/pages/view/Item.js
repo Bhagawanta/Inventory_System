@@ -1,19 +1,19 @@
 import React , { useEffect, useState } from 'react'
 import Page from 'components/Page';
 import {
-    Button,
+    // Button,
     Card,
     CardBody,
     CardHeader,
     Col,
-    Form,
-    FormGroup,
-    Input,
-    Label,
+    // Form,
+    // FormGroup,
+    // Input,
+    // Label,
     Row,
     Table
 } from 'reactstrap';
-const tableTypes = ['', 'bordered', 'striped', 'hover'];
+// const tableTypes = ['', 'bordered', 'striped', 'hover'];
 const Item = () => {
 
     const [data, setData] = useState([]);
@@ -58,7 +58,7 @@ const Item = () => {
                                     <th scope="row">{item.item_id}</th>
                                     <td>{item.item_name}</td>
                                     <td>{item.item_make}</td>
-                                    <td>{item.item_price}</td>
+                                    <td>{item.item_value}</td>
                                 </tr>
                         )
                     })}

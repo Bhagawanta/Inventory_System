@@ -1,32 +1,32 @@
 import logo200Image from 'assets/img/logo/logo_200.png';
 import sidebarBgImage from 'assets/img/sidebar/sidebar-4.jpg';
 import SourceLink from 'components/SourceLink';
-import { exact } from 'prop-types';
+// import { exact } from 'prop-types';
 import React from 'react';
-import { FaGithub } from 'react-icons/fa';
+// import { FaGithub } from 'react-icons/fa';
 import {
-  MdAccountCircle,
+  // MdAccountCircle,
   MdAddToPhotos,
-  MdArrowDropDownCircle,
+  // MdArrowDropDownCircle,
   MdBorderAll,
-  MdBrush,
-  MdChromeReaderMode,
-  MdDashboard,
+  // MdBrush,
+  // MdChromeReaderMode,
+  // MdDashboard,
   MdExtension,
-  MdGroupWork,
-  MdInsertChart,
+  // MdGroupWork,
+  // MdInsertChart,
   MdKeyboardArrowDown,
-  MdNotificationsActive,
-  MdPages,
+  // MdNotificationsActive,
+  // MdPages,
   MdRadioButtonChecked,
   MdSend,
-  MdStar,
+  // MdStar,
   MdTextFields,
-  MdViewCarousel,
-  MdViewDay,
-  MdViewList,
-  MdWeb,
-  MdWidgets,
+  // MdViewCarousel,
+  // MdViewDay,
+  // MdViewList,
+  // MdWeb,
+  // MdWidgets,
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
@@ -48,6 +48,7 @@ const sidebarBackground = {
 const navInventory = [
   { to: '/items', name: 'items', exact: false, Icon: MdRadioButtonChecked },
   { to: '/vendor', name: 'vendors', exact: false, Icon: MdRadioButtonChecked},
+  { to: '/owner', name: 'owner', exact:false, Icon:MdRadioButtonChecked},
   { to: '/orders', name: 'orders' , exact: false, Icon:MdRadioButtonChecked},
 ] 
 
@@ -76,25 +77,26 @@ const navInventory = [
 const navContents = [
   { to: '/view_item', name: 'Item', exact: false, Icon: MdTextFields },
   { to: '/view_vendor', name: 'Vendor', exact: false, Icon: MdBorderAll },
+  { to: '/view_owner', name: 'Owner', exact: false, Icon: MdBorderAll},
   { to: '/view_order', name: 'Order', exact: false, Icon:MdAddToPhotos}
 ];
 
-const pageContents = [
-  { to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
-  {
-    to: '/login-modal',
-    name: 'login modal',
-    exact: false,
-    Icon: MdViewCarousel,
-  },
-];
+// const pageContents = [
+//   { to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
+//   {
+//     to: '/login-modal',
+//     name: 'login modal',
+//     exact: false,
+//     Icon: MdViewCarousel,
+//   },
+// ];
 
-const navItems = [
-  { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-  { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
-  { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
-  { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
-];
+// const navItems = [
+//   { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
+//   { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
+//   { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
+//   { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
+// ];
 
 const bem = bn.create('sidebar');
 

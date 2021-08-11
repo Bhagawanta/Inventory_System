@@ -1,50 +1,53 @@
-import Avatar from 'components/Avatar';
-import { UserCard } from 'components/Card';
-import Notifications from 'components/Notifications';
+// import Avatar from 'components/Avatar';
+// import { UserCard } from 'components/Card';
+// import Notifications from 'components/Notifications';
 import SearchInput from 'components/SearchInput';
-import { notificationsData } from 'demos/header';
-import withBadge from 'hocs/withBadge';
+// import { notificationsData } from 'demos/header';
+// import withBadge from 'hocs/withBadge';
 import moment from 'moment';
 import React from 'react';
 import {
   MdClearAll,
-  MdExitToApp,
-  MdHelp,
-  MdInsertChart,
-  MdMessage,
-  MdNotificationsActive,
-  MdNotificationsNone,
-  MdPersonPin,
-  MdSettingsApplications,
+  // MdExitToApp,
+  // MdHelp,
+  // MdInsertChart,
+  // MdMessage,
+  // MdNotificationsActive,
+  // MdNotificationsNone,
+  // MdPersonPin,
+  // MdSettingsApplications,
 } from 'react-icons/md';
 import {
   Button,
-  ListGroup,
-  ListGroupItem,
+  // ListGroup,
+  // ListGroupItem,
   // NavbarToggler,
   Nav,
   Navbar,
-  NavItem,
-  NavLink,
-  Popover,
-  PopoverBody,
+  // NavItem,
+  // NavLink,
+  // Popover,
+  // PopoverBody,
 } from 'reactstrap';
 import bn from 'utils/bemnames';
-
+const date = new Date("2021-08-11");
+const ay = 5;
+date.setFullYear(date.getFullYear()+ay);
+console.log(date);
 const bem = bn.create('header');
 
-const MdNotificationsActiveWithBadge = withBadge({
-  size: 'md',
-  color: 'primary',
-  style: {
-    top: -10,
-    right: -10,
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  children: <small>5</small>,
-})(MdNotificationsActive);
+// const MdNotificationsActiveWithBadge = withBadge({
+//   size: 'md',
+//   color: 'primary',
+//   style: {
+//     top: -10,
+//     right: -10,
+//     display: 'inline-flex',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   children: <small>5</small>,
+// })(MdNotificationsActive);
 
 class Header extends React.Component {
   state = {
@@ -77,7 +80,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { isNotificationConfirmed } = this.state;
+    // const { isNotificationConfirmed } = this.state;
 
     return (
       <Navbar light expand className={bem.b('bg-white')}>

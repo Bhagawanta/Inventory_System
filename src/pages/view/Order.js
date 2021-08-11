@@ -1,19 +1,19 @@
 import React , { useEffect, useState } from 'react'
 import Page from 'components/Page';
 import {
-    Button,
+    // Button,
     Card,
     CardBody,
     CardHeader,
     Col,
-    Form,
-    FormGroup,
-    Input,
-    Label,
+    // Form,
+    // FormGroup,
+    // Input,
+    // Label,
     Row,
     Table
 } from 'reactstrap';
-const tableTypes = ['', 'bordered', 'striped', 'hover'];
+// const tableTypes = ['', 'bordered', 'striped', 'hover'];
 const Order = () => {
 
     const [data, setData] = useState([]);
@@ -47,12 +47,13 @@ const Order = () => {
                     <th>PO</th>
                     <th>PO Date</th>
                     <th>Vendor Name</th>
+                    <th>Owner Name</th>
                     <th>Item Name </th>
-                    <th>Quantity</th>
+                    {/* <th>Quantity</th>
                     <th>Value</th>
                     <th>Date Of Delivery</th>
                     <th>Date Of Installation</th>
-                    <th>Warranty Years</th>
+                    <th>Warranty Years</th> */}
                     <th>Warranty Upto</th>
                   </tr>
                 </thead>
@@ -63,13 +64,14 @@ const Order = () => {
                                 <tr key={index}>
                                     <th scope="row">{item.po_id}</th>
                                     <td>{item.po_date}</td>
-                                    <td>{item.vendor_name}</td>
-                                    <td>{item.item_name}</td>
-                                    <td>{item.item_qty}</td>
+                                    <td>{item.vendorname}</td>
+                                    <td>{item.ownername}</td>
+                                    <td>{item.itemname}</td>
+                                    {/* <td>{item.item_qty}</td>
                                     <td>{item.item_value}</td>
                                     <td>{item.dod}</td>
                                     <td>{item.doi}</td>
-                                    <td>{item.wyears}</td>
+                                    <td>{item.wyears}</td> */}
                                     <td>{item.wupto}</td>
                                 </tr>
                         )

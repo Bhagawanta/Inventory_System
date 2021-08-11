@@ -17,7 +17,7 @@ import {
     const [name, setName] = useState('');
     const [make, setMake] = useState('');
     const [value, setValue] = useState('');
-    const [alt, setAlt] = useState('');
+    // const [alt, setAlt] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
         //alert("Hello"+name);
@@ -53,7 +53,7 @@ import {
                 return response.json();     
             }else if(response.status === 400){
                 const err = JSON.stringify(response.json());
-                alert("Please provide proper fields");
+                alert("Please provide proper fields"+err);
                 console.log("SOMETHING WENT WRONG")
                 this.setState({ requestFailed: true })
             }})
